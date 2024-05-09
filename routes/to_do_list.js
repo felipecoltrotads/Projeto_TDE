@@ -1,4 +1,5 @@
 const express = require ("express")
+const { prisma } = require("../db/prisma")
 const router = express.Router()
 
 let tasks = [
@@ -21,9 +22,10 @@ let tasks = [
     ]
 
 
-router.get("/tasks", (req, res) => {
-     res.json(tasks)   
-})
+router.get("/tasks", async (req, res) => {
+    const tasks = await prisma.tasks.findMany()
+        res.json(tasks) 
+    })
 
 router.post("/task", (req, res) => {
     const data = req.body
