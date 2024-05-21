@@ -1,5 +1,6 @@
 const express = require ("express")
-const { router } = require("./routes/to_do_list")
+const { router: movieRouter } = require("./routes/to_do_list")
+const { router: userRouter} = require('./routes/user')
  
 const server = express()
 server.use(express.json())
@@ -10,7 +11,8 @@ server.get("/health", (req, res) => {
     })
 })
 
-server.use("/api",router)
+server.use("/api",movieRouter)
+server.use("/api",userRouter)
 
 const port = 5000
 server.listen(port, () => {
