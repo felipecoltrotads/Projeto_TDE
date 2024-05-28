@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 const { prisma } = require("../db/prisma")
 
-router.post("/v1/register", async (req, res) => {
+router.post("/register", async (req, res) => {
     const userAlreadyExists = await prisma.users.findFirst({
         where: {
             email: req.body.email
@@ -24,7 +24,7 @@ router.post("/v1/register", async (req, res) => {
     res.send(user)
 })
 
-router.post("/v1/login", async (req, res) => {
+router.post("/login", async (req, res) => {
     const user = await prisma.users.findFirst({
         where: {
             email: req.body.email
